@@ -23,7 +23,7 @@ type Props = {};
 const flamesImages: Record<string, string> = {
   Friends: FriendsImage,
   Lovers: LoversImage,
-  Affectionate: AffectionImage,
+  Affection: AffectionImage,
   Marriage: MarriageImage,
   Enemies: EnemiesImage,
   Siblings: SiblingsImage,
@@ -99,7 +99,7 @@ export default function LoginForm({}: Props) {
              {result && (
               <>
                 <Image src={flamesImages[result.relation]} alt={result.relation} className="w-full max-w-40 mx-auto" />
-                <div className="text-center font-bold text-5xl">{result.relation}</div>
+                <div className="text-center font-bold text-3xl">{result.relation}</div>
                 <div className="text-center text-md">Love Percentage: {result.percentage}%</div>
                 <Progress value={Number(result.percentage)}/>
                 <div className="text-center">
