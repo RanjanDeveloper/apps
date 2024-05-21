@@ -3,7 +3,7 @@
 import { db } from "@/db";
 import { flames } from "@/db/schemas";
 export const calculateFlames = async (name1: string, name2: string) => {
-  const flamess = ["Friends", "Lovers", "Affectionate", "Marriage", "Enemies", "Siblings"];
+  const flamess = ["Friends", "Lovers", "Affection", "Marriage", "Enemies", "Siblings"];
   let count = 0;
 
   const name1Arr = name1.toLowerCase().replace(/\s/g, "").split("");
