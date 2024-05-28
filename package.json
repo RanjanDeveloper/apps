@@ -59,6 +59,7 @@
     "react-use": "^17.5.0",
     "recharts": "^2.12.5",
     "resend": "^3.2.0",
+    "sharp": "^0.33.4",
     "sonner": "^1.4.3",
     "swr": "^2.2.5",
     "tailwind-merge": "^2.2.1",
