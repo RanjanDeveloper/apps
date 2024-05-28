@@ -117,6 +117,7 @@ export default function page({}: Props) {
       const link = `${process.env.NEXT_PUBLIC_APP_URL}/knowme/friend2?quizId=${result.link}`;
 
       setGeneratedLink(link);
+      setQuizzId(result.link);
       localStorage.setItem("quizzId", result.link);
       localStorage.setItem("generatedLink", link);
       // All questions answered
