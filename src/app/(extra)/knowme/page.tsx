@@ -147,7 +147,7 @@ export default function page({}: Props) {
   };
   if (isPending) return <Loading />;
   return (
-    <div className="max-w-3xl justify-between flex flex-col md:flex-row mx-auto pt-10 font-mono">
+    <div className="max-w-3xl justify-between flex flex-col md:flex-row mx-auto p-5 pt-10 font-mono">
       {isNameEntered ? (
         generatedLink ? (
           <div className="mt-5 mx-auto">
