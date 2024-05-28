@@ -8,7 +8,6 @@ export const calculateFlames = async (name1: string, name2: string) => {
 
   const name1Arr = name1.toLowerCase().replace(/\s/g, "").split("");
   const name2Arr = name2.toLowerCase().replace(/\s/g, "").split("");
-  console.log(name1Arr, name2Arr);
   // Calculate the number of uncommon characters
   name1Arr.forEach(char => {
     if (name2Arr.includes(char)) {
@@ -19,7 +18,6 @@ export const calculateFlames = async (name1: string, name2: string) => {
   });
 
   count += name2Arr.length;
-  console.log(count);
   let index = 0;
   while (flamess.length > 1) {
     index = (index + count - 1) % flamess.length;
