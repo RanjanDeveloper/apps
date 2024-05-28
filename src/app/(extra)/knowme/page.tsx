@@ -161,7 +161,7 @@ export default function page({}: Props) {
             </div>
 
             <div className="border mt-5 rounded-md shadow">
-              <p className="font-2xl  flex justify-between rounded-t-md items-center font-bold p-3 bg-slate-900 text-white">Your friends answers <RefreshCcw role="button" onClick={handleRefresh} className="size-4"/></p>
+              <p className="font-2xl  flex justify-between rounded-t-md items-center font-bold p-3 bg-slate-900 text-white">Your friends matching scores <RefreshCcw role="button" onClick={handleRefresh} className="size-4"/></p>
               {friendAnswers.length > 0 ? (
                 <>
                   {friendAnswers.map((friends: any, index: number) => (
@@ -178,7 +178,7 @@ export default function page({}: Props) {
                               "text-red-600": friends.score <= 3,
                             })}
                           >
-                            {friends.score}
+                            Score : {friends.score}
                           </span>
                         </div>
                       </div>
@@ -233,7 +233,7 @@ export default function page({}: Props) {
                         </FormItem>
                       )}
                     />
-                    <Button type="submit" className="mt-5" disabled={form.formState.isSubmitting}>
+                    <Button type="submit" className="mt-5 w-full" disabled={form.formState.isSubmitting}>
                       {currentQue < questionsData.length - 1 ? "Next question" : "Submit answers"}
                     </Button>
                   </form>
