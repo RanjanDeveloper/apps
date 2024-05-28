@@ -1,4 +1,4 @@
-import { timestamp } from "drizzle-orm/pg-core";
+import { json, timestamp } from "drizzle-orm/pg-core";
 // import { int, mysqlTable, varchar, text, datetime, primaryKey, mysqlEnum, boolean } from "drizzle-orm/mysql-core";
 // import type { AdapterAccount } from "@auth/core/adapters";
 // import { relations } from "drizzle-orm";
@@ -239,6 +239,27 @@ export const flames = pgTable("flames", {
   percentage:text("percentage").notNull(),
   timestamp: timestamp("timestamp", { mode: "date" }).defaultNow(),
 });
+
+export const Gender = pgEnum("Gender", ["MALE", "FEMALE"]);
+export const answers = pgTable("answers", {
+  id: serial('id').primaryKey(),
+  name: text("name").notNull(),
+  answers: json("answers").notNull(), 
+  gender: Gender('gender'),
+  timestamp: timestamp("timestamp", { mode: "date" }).defaultNow(),
+});
+export const quizLinks = pgTable("quiz_links", {
+  answerId: serial("answer_id").references(() => answers.id).notNull(), // Foreign key to the answers table
+  link: text("link").notNull().primaryKey(), // The unique link identifier
+  timestamp: timestamp("timestamp", { mode: "date" }).defaultNow(),
+});
+
+export const friendAnswers = pgTable('friendAnswers',{
+  id: serial('id').primaryKey(),
+  quizzId: text("quizz_id").references(() =>quizLinks.link).notNull(),
+  name: text("name").notNull(),
+  score:text("score").notNull(),
+})
 export const userRelations = relations(user, ({ one, many }) => ({
   accounts: one(accounts, {
     fields: [user.id],
