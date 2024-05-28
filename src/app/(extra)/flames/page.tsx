@@ -31,7 +31,7 @@ const flamesImages: Record<string, string> = {
 
 export default function LoginForm({}: Props) {
   const [isPending, startTransition] = useTransition();
-  const [result, setResult] = useState<{ relation: string, percentage: string } | null>(null);
+  const [result, setResult] = useState<{ relation: string; percentage: string } | null>(null);
 
   const form = useForm<z.infer<typeof Flameschema>>({
     resolver: zodResolver(Flameschema),
@@ -47,10 +47,10 @@ export default function LoginForm({}: Props) {
       calculateFlames(values.name1.toLowerCase().replace(/\s/g, ""), values.name2.toLowerCase().replace(/\s/g, "")).then(data => setResult(data));
     });
   };
- const backHandler = ()=> {
-     setResult(null);
-     form.reset();
- }
+  const backHandler = () => {
+    setResult(null);
+    form.reset();
+  };
   return (
     <section className="bg-gray-50 dark:bg-gray-900 w-full">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -96,16 +96,39 @@ export default function LoginForm({}: Props) {
                 </Form>
               </>
             )}
-             {result && (
+            {result && (
               <>
-                <Image src={flamesImages[result.relation]} alt={result.relation} className="w-full max-w-40 mx-auto" />
-                <div className="text-center font-bold text-3xl">{result.relation}</div>
-                <div className="text-center text-md">Love Percentage: {result.percentage}%</div>
-                <Progress value={Number(result.percentage)}/>
-                <div className="text-center">
-                  <Button size="sm" variant="link" className="text-blue-800" onClick={backHandler}>Back to Calculate</Button>
-                </div>
-              </>
+              <Image
+                src={flamesImages[result.relation]}
+                alt={result.relation}
+                className="w-full max-w-40 mx-auto"
+              />
+              <div className="flex flex-col leading-5 items-center font-semibold space-y-2 text-2xl text-gray-800">
+                <span className="capitalize">{form.getValues("name1").toLowerCase()}</span>
+                <span className="text-sm text-gray-600">&</span>
+                <span className="capitalize">{form.getValues("name2").toLowerCase()}</span>
+              </div>
+              <div className="text-center font-bold text-3xl text-indigo-600 mt-4">
+                {result.relation}
+              </div>
+              <div className="text-center text-md text-gray-700 mt-2">
+                Love Percentage: {result.percentage}%
+              </div>
+              <div className="w-3/4 mx-auto mt-4">
+                <Progress value={Number(result.percentage)} className="h-4 rounded-full bg-indigo-200" />
+              </div>
+              <div className="text-center mt-6">
+                <Button
+                  size="sm"
+                  variant="link"
+                  className="text-blue-800 hover:text-blue-600"
+                  onClick={backHandler}
+                >
+                  Back to Calculate
+                </Button>
+              </div>
+            </>
+            
             )}
           </div>
         </div>
