@@ -62,7 +62,7 @@ export default function Page({}: Props) {
         }
       }
     };
-    
+
     fetchAnswers();
   }, [quizId]);
 
@@ -195,7 +195,7 @@ export default function Page({}: Props) {
                                 )}
                               />
                             { form.getValues('answer') &&
-                                <Button type="submit"  className="mt-5" disabled={form.formState.isSubmitting}>
+                                <Button type="submit"  className="mt-5 w-full" disabled={form.formState.isSubmitting}>
                                 {currentQue < questionsData.length - 1 ? "Next question" : "Submit answers"}
                               </Button>
                             }
