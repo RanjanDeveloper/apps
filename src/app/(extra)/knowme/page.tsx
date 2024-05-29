@@ -120,8 +120,6 @@ export default function page({}: Props) {
       setQuizzId(result.link);
       localStorage.setItem("quizzId", result.link);
       localStorage.setItem("generatedLink", link);
-      // All questions answered
-      console.log("Quiz completed");
     }
     localStorage.setItem("answers", JSON.stringify([...answers, data.answer]));
     form.reset(); // Reset form for the next question
@@ -134,7 +132,11 @@ export default function page({}: Props) {
     }
   };
   const handleRestart = () => {
-    localStorage.clear();
+    localStorage.removeItem("name");
+    localStorage.removeItem("gender");
+    localStorage.removeItem("answers");
+    localStorage.removeItem("quizzId");
+    localStorage.removeItem("generatedLink");
     setIsNameEntered(false);
     setGeneratedLink(null);
     setAnswers([]);
