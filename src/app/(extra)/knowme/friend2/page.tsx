@@ -223,7 +223,7 @@ export default function Page({}: Props) {
                             {friendTwoScore} / {questionsData.length}
                           </span>
                           <span className="text-pretty text-center">
-                            {friendOneName} understand {pronoun.hisHer} friend {friendTwoName} <span className="font-semibold">{percentage}%</span>{" "}
+                            {friendTwoName} understands their friend {friendOneName} <span className="font-semibold">{percentage}%</span>
                           </span>
                         </span>
                       </div>
