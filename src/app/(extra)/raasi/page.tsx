@@ -16,6 +16,7 @@ import { TimePicker12Demo } from "@/components/shadcnextra/time-picker-12h-demo"
 import { useAppDispatch } from "@/lib/store/hooks";
 import { setRaasiData } from "@/lib/store/slices/raasiDataSlice";
 import { useRouter } from "next/navigation";
+import { TimePickerSelect } from "@/components/shadcnextra/time-picker-select";
 
 
 type Props = {};
@@ -169,7 +170,7 @@ debugger;
             render={({ field }) => (
               <FormItem>
                 <FormLabel showError={false}>Birth Time</FormLabel>
-                <TimePicker12Demo date={field.value} setDate={(date)=>handleTime(field,date)} />
+                <TimePickerSelect date={field.value} setDate={(date)=>handleTime(field,date)} />
                   <FormDescription>
                   Entering the correct time will ensure accurate Natchathira (birth star) calculation.
                 </FormDescription>

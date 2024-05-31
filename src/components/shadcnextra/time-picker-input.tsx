@@ -99,19 +99,7 @@ const TimePickerInput = React.forwardRef<
         setDate(setDateByType(tempDate, newValue, picker, period));
       }
     };
-    const handleInput = (e: React.FormEvent<HTMLInputElement>) => {
-      const input = e.currentTarget.value;
-      const tempDate = new Date(date);
-
-      if (input.length <= 2) {
-        setDate(setDateByType(tempDate, input, picker, period));
-      }
-
-      if (input.length === 2) {
-        setFlag(false);
-        onRightFocus?.();
-      }
-    };
+ 
     return (
       <Input
         ref={ref}
@@ -127,13 +115,10 @@ const TimePickerInput = React.forwardRef<
           onChange?.(e);
         }}
         type={type}
-        inputMode="numeric"
+        inputMode="decimal"
         onKeyDown={(e) => {
           onKeyDown?.(e);
           handleKeyDown(e);
-        }}
-        onInput={(e) => {
-          handleInput(e);
         }}
         {...props}
       />
