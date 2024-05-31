@@ -1,4 +1,4 @@
-import { json, timestamp } from "drizzle-orm/pg-core";
+import { json, jsonb, timestamp} from "drizzle-orm/pg-core";
 // import { int, mysqlTable, varchar, text, datetime, primaryKey, mysqlEnum, boolean } from "drizzle-orm/mysql-core";
 // import type { AdapterAccount } from "@auth/core/adapters";
 // import { relations } from "drizzle-orm";
@@ -259,7 +259,45 @@ export const friendAnswers = pgTable('friendAnswers',{
   quizzId: text("quizz_id").references(() =>quizLinks.link).notNull(),
   name: text("name").notNull(),
   score:text("score").notNull(),
-})
+});
+// export const raasiData = pgTable("raasi_data", {
+//   id: text("id")
+//   .primaryKey()
+//   .$defaultFn(() => crypto.randomUUID()),
+//   name: text("name").notNull(),
+//   birth_place: text("birth_place").notNull(),
+//   birth_date: text("birth_date").notNull(),
+//   birth_time: text("birth_time").notNull(),
+//   raasi: text("raasi").notNull(),
+//   nakshathra: text("nakshathra").notNull(),
+//   raasi_details: jsonb("raasi_details").notNull(),
+//   timestamp: timestamp("timestamp", { mode: "date" }).defaultNow(),
+// });
+// Define the Raasi Details Schema
+export const raasiDetails = pgTable("raasiDetails", {
+  id: text("id")
+  .primaryKey()
+  .$defaultFn(() => crypto.randomUUID()),
+  birth_date: text("birth_date").notNull(),
+  birth_time: text("birth_time").notNull(),
+  raasi: text("raasi").notNull(),
+  nakshathra: text("nakshathra").notNull(),
+  raasi_data: jsonb("raasi_data"), // Additional raasi details as needed
+  timestamp: timestamp("timestamp", { mode: "date" }).defaultNow(),
+});
+
+// Define the Raasi User Schema
+export const raasiUser = pgTable("raasiUser", {
+  id: text("id")
+  .primaryKey()
+  .$defaultFn(() => crypto.randomUUID()),
+  name: text("name").notNull(),
+  birth_date: text("birth_date").notNull(),
+  birth_time: text("birth_time").notNull(),
+  birth_place: text("birth_place").notNull(),
+  raasi_details_id: text("raasi_details_id").notNull().references(() => raasiDetails.id, { onDelete: "cascade" }),
+  timestamp: timestamp("timestamp", { mode: "date" }).defaultNow(),
+});
 export const userRelations = relations(user, ({ one, many }) => ({
   accounts: one(accounts, {
     fields: [user.id],
@@ -280,7 +318,15 @@ export const eventsRelations = relations(events, ({ one, many }) => ({
   }),
   payers: many(payers),
 }));
-
+export const raasiUserRelations = relations(raasiUser, ({ one, many }) => ({
+  raasiDetails: one(raasiDetails, {
+    fields: [raasiUser.raasi_details_id],
+    references: [raasiDetails.id],
+  })
+}));
+export const raasiDetailsRelations = relations(raasiDetails, ({ one, many }) => ({
+  raasiUsers: many(raasiUser),
+}));
 export const payersRelations = relations(payers, ({ one }) => ({
   events: one(events, {
     fields: [payers.eventId],

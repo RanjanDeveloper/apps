@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import counterReducer from "./slices/counterSlice";
+import raasiDataReducer from "./slices/raasiDataSlice";
 import { adminApi } from "./apiSlices/adminApi";
 import { setupListeners } from '@reduxjs/toolkit/query'
 export const makeStore = ()=>{
     return  configureStore({
         reducer: {
-            counter : counterReducer,
+           raasiData : raasiDataReducer,
             [adminApi.reducerPath]:adminApi.reducer
         },
         middleware:(getDefaultMiddleware)=> 

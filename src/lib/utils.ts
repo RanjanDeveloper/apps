@@ -28,3 +28,13 @@ export function getEventTypeVariant(eventType: EventsEnum): "default" | "seconda
       return "default";
   }
 }
+
+export function getTamilOrdinal(n: number): string {
+  const ordinals: { [key: number]: string } = {
+    1: "முதல்",
+    2: "இரண்டாவது",
+    3: "மூன்றாவது",
+    4: "நான்காவது",
+  };
+  return ordinals[n] || `${n}வது`;
+}
