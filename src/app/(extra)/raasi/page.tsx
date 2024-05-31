@@ -112,8 +112,9 @@ debugger;
   }
   return (
     <div className="max-w-sm mx-auto w-full">
+      <p className="text-3xl font-bold text-center mt-10 flex flex-col">Find Your Zodiac Sign <span className="font-semibold text-sm">(உங்கள் ராசியை கணக்கிடவும்)</span></p>
       <Form {...form}>
-        <form className="space-y-4 md:space-y-6 p-4 mt-10" onSubmit={form.handleSubmit(submitHandler)}>
+        <form className="space-y-4 md:space-y-6 p-4 mt-5" onSubmit={form.handleSubmit(submitHandler)}>
           <FormField
             control={form.control}
             name="name"
