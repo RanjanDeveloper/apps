@@ -99,7 +99,19 @@ const TimePickerInput = React.forwardRef<
         setDate(setDateByType(tempDate, newValue, picker, period));
       }
     };
- 
+    const handleInput = (e: React.FormEvent<HTMLInputElement>) => {
+      const input = e.currentTarget.value;
+      const tempDate = new Date(date);
+
+      if (input.length <= 2) {
+        setDate(setDateByType(tempDate, input, picker, period));
+      }
+
+      if (input.length === 2) {
+        setFlag(false);
+        onRightFocus?.();
+      }
+    };
     return (
       <Input
         ref={ref}
@@ -121,11 +133,7 @@ const TimePickerInput = React.forwardRef<
           handleKeyDown(e);
         }}
         onInput={(e) => {
-          const inputEvent = e.nativeEvent as InputEvent;
-          const key = inputEvent.data || '';
-          if (key >= "0" && key <= "9") {
-            handleKeyDown({ ...e, key } as React.KeyboardEvent<HTMLInputElement>);
-          }
+          handleInput(e);
         }}
         {...props}
       />
