@@ -19,7 +19,7 @@ import { and, eq,sql } from "drizzle-orm";
       .select()
       .from(raasiUser)
       .where(and(eq(sql`lower(${raasiUser.name})`,name.toLowerCase()),eq(raasiUser.birth_date, birth_date),
-       eq(raasiUser.birth_time, birth_time),eq(sql`lower(${raasiUser.birth_place})`,birth_place)))
+       eq(raasiUser.birth_time, birth_time),eq(sql`lower(${raasiUser.birth_place})`,birth_place.toLowerCase())))
       .limit(1);
   };
 
