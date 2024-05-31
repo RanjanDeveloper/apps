@@ -16,6 +16,7 @@ import { TimePicker12Demo } from "@/components/shadcnextra/time-picker-12h-demo"
 import { useAppDispatch } from "@/lib/store/hooks";
 import { setRaasiData } from "@/lib/store/slices/raasiDataSlice";
 import { useRouter } from "next/navigation";
+import { TimePickerSelect } from "@/components/shadcnextra/time-picker-select";
 
 
 type Props = {};
@@ -111,8 +112,9 @@ debugger;
   }
   return (
     <div className="max-w-sm mx-auto w-full">
+      <p className="text-3xl font-bold text-center mt-10 flex flex-col">Find Your Zodiac Sign <span className="font-semibold text-sm">(உங்கள் ராசியை கணக்கிடவும்)</span></p>
       <Form {...form}>
-        <form className="space-y-4 md:space-y-6 p-4 mt-10" onSubmit={form.handleSubmit(submitHandler)}>
+        <form className="space-y-4 md:space-y-6 p-4 mt-5" onSubmit={form.handleSubmit(submitHandler)}>
           <FormField
             control={form.control}
             name="name"
@@ -169,7 +171,7 @@ debugger;
             render={({ field }) => (
               <FormItem>
                 <FormLabel showError={false}>Birth Time</FormLabel>
-                <TimePicker12Demo date={field.value} setDate={(date)=>handleTime(field,date)} />
+                <TimePickerSelect date={field.value} setDate={(date)=>handleTime(field,date)} />
                   <FormDescription>
                   Entering the correct time will ensure accurate Natchathira (birth star) calculation.
                 </FormDescription>
