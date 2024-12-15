@@ -21,11 +21,20 @@ export const getAnswersByQuizId = async (quizId: string) => {
   if (!answersString) {
     throw new Error("Answers not found");
   }
+  let parsedAnswers;
+  try {
+    parsedAnswers = typeof answersString === 'string' && answersString.startsWith('{') 
+      ? JSON.parse(answersString) 
+      : answersString;
+  } catch (error) {
+    console.error("Failed to parse answersString", answersString);
+    throw new Error("Invalid answers format");
+  }
 
   return {
-    answers: JSON.parse(answersString),
-    name: quizLink[0].answers?.name || "",
-    gender:quizLink[0].answers?.gender
+    answers: parsedAnswers,
+    name: nameString || "",
+    gender: quizLink[0].answers?.gender
   };
 };
 export const getFriendsAnswersByQuizId = async (quizId: string) => {
