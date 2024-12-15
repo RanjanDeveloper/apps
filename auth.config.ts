@@ -38,6 +38,7 @@ export default {
             },
             body: JSON.stringify({ email }),
           });
+          
           const user = await response.json();
           if (!user || !user.password) return null;
 
